@@ -10,19 +10,21 @@ Official LeWM checkpoints and datasets: [quentinll/lewm on Hugging Face](https:/
 
 ## Install
 
-> **Important:** you must install `stable-worldmodel` from source. The PyPI wheel (0.0.6) is missing the LeWM code path this tool depends on. Tested against commit `ba10600`.
+> **Important:** `stable-worldmodel` must be installed from source — the PyPI wheel (0.0.6) is missing the LeWM code path this tool depends on. Do this before installing the training extras or `pip` will silently pull in the broken wheel. Tested against commit `ba10600`.
 
 ```bash
+# 1. Clone and create a virtualenv
 git clone https://github.com/kevdozer1/leWN_finetune_toolkit.git lewm-finetune
 cd lewm-finetune
-
 python -m venv .venv && source .venv/bin/activate
 
+# 2. Install torch for your platform
 pip install torch  # see https://pytorch.org/get-started/locally/
 
-# required: stable-worldmodel from source
+# 3. Install stable-worldmodel from source (do this before step 4)
 pip install -e "git+https://github.com/galilai-group/stable-worldmodel.git@ba10600#egg=stable-worldmodel"
 
+# 4. Install lewm-finetune and the rest of the training stack
 pip install -e ".[train]"
 ```
 
