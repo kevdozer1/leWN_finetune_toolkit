@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lewm-finetune"
+version = "0.1.0"
+description = "Minimal finetuning entry point for pretrained LeWorldModel checkpoints."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "lewm-finetune contributors" }]
+keywords = ["world-model", "lewm", "finetuning", "robotics"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "numpy>=1.24",
+    "PyYAML>=6.0",
+    "h5py>=3.9",
+    "hdf5plugin>=4.1",
+    "tqdm>=4.65",
+]
+
+[project.optional-dependencies]
+# Training stack. Torch is left to the user (CUDA/CPU build choice).
+train = [
+    "torch>=2.1",
+    "lightning>=2.1",
+    "stable-pretraining>=0.1.6",
+    "stable-worldmodel>=0.0.6",
+]
+dev = [
+    "pytest>=7.4",
+    "ruff>=0.4",
+]
+
+[project.scripts]
+# One entry point, three subcommands: train | eval | inspect.
+lewm-finetune = "lewm_finetune.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/kevdozer1/leWN_finetune_toolkit"
+Issues = "https://github.com/kevdozer1/leWN_finetune_toolkit/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

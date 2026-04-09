@@ -1,0 +1,12 @@
+# Smallest valid lewm-finetune config.
+#
+# Required: pretrained_path, dataset_name, data_cache_dir.
+# Everything else uses lewm_finetune.config.DEFAULTS.
+#
+# Run:
+#     python scripts/finetune.py --config configs/minimal.yaml
+
+pretrained_path: ./checkpoints/lewm-pretrained
+dataset_name: my_dataset
+data_cache_dir: ./data
+action_dim: 7

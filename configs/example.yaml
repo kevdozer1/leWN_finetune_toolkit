@@ -1,0 +1,36 @@
+# Annotated lewm-finetune config with every knob lewm_finetune.config.DEFAULTS
+# exposes. Delete anything you do not need — unspecified keys fall back to
+# defaults from src/lewm_finetune/config.py.
+#
+# Run:
+#     python scripts/finetune.py --config configs/example.yaml
+
+# ── Required ────────────────────────────────────────────────────────────────
+pretrained_path: ./checkpoints/lewm-pretrained   # folder, .pt file, or HF repo id
+dataset_name: my_dataset                          # <data_cache_dir>/datasets/<name>.h5
+data_cache_dir: ./data                            # parent containing datasets/
+
+# ── Dataset / batching ──────────────────────────────────────────────────────
+action_dim: 7              # dimensionality of one action vector
+frameskip: 1               # stride in frames; effective action dim = action_dim * frameskip
+history_size: 3            # number of context frames fed to the world model
+num_preds: 1               # number of prediction frames
+batch_size: 16
+num_workers: 0
+image_size: 224            # square resize for RGB frames
+normalize_observation: true
+
+# ── Optimization ────────────────────────────────────────────────────────────
+max_epochs: 10
+lr: 5.0e-5
+weight_decay: 1.0e-3
+sigreg_weight: 0.09        # weight on the SIGReg embedding regularizer
+gradient_clip: 1.0
+grad_accum_steps: 1        # small-GPU knob: effective_batch = batch_size * this
+precision: bf16-mixed      # bf16-mixed | 16-mixed | 32-true
+seed: 42
+
+# ── Output ──────────────────────────────────────────────────────────────────
+run_name: example          # used to label the auto-timestamped run directory
+# output_dir: runs/my-custom-name   # uncomment to pin the exact output directory
+save_every_epoch: false    # if true, keep per-epoch checkpoints as well as final
