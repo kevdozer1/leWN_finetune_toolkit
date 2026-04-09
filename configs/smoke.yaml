@@ -1,10 +1,21 @@
-# End-to-end smoke test config.
-# Uses the local pilot HDF5 and the local lewm-cube pretrained checkpoint.
-# Intentionally tiny: 1 epoch, batch 4, so it finishes fast on any GPU/CPU.
+# End-to-end smoke config. Tiny: 1 epoch, batch 4 — runs on any GPU or CPU.
+#
+# This file is a TEMPLATE. Before running it, edit the two placeholders
+# marked with <ANGLE_BRACKETS> below so they point at your dataset.
+#
+# Usage:
+#     lewm-finetune inspect <data_cache_dir>/datasets/<dataset_name>.h5
+#     lewm-finetune train --config configs/smoke.yaml
+#     lewm-finetune eval --run-dir runs/<timestamp>_smoke
 
-pretrained_path: D:/hf_cache/models--quentinll--lewm-cube/snapshots/7d05e023b3c1114cc8e803ec23fb0177d688598b
-dataset_name: pilot_boring3d
-data_cache_dir: D:/bridgedata_v2_subset
+# Pretrained checkpoint. HuggingFace repo ids are auto-downloaded on first
+# use, so no local path is required. Swap for a local folder if you prefer.
+pretrained_path: quentinll/lewm-cube
+
+# EDIT THESE to match your machine. The loader reads
+# <data_cache_dir>/datasets/<dataset_name>.h5 — both pieces are required.
+dataset_name: <YOUR_DATASET_NAME>
+data_cache_dir: ./data
 
 action_dim: 7
 frameskip: 1

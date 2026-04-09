@@ -4,7 +4,7 @@
 # Everything else uses lewm_finetune.config.DEFAULTS.
 #
 # Run:
-#     python scripts/finetune.py --config configs/minimal.yaml
+#     lewm-finetune train --config configs/minimal.yaml
 
 pretrained_path: ./checkpoints/lewm-pretrained
 dataset_name: my_dataset

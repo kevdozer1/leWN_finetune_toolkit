@@ -4,7 +4,7 @@ lewm-finetune reads episodes from a **single HDF5 file** via
 `stable_worldmodel.data.dataset.HDF5Dataset`. This is the only supported
 format. There is no CSV loader, no NPZ loader, no folder-of-JPEGs loader. If
 you want to train on new data, convert it to this format first, then run
-``python scripts/validate_dataset.py <file>.h5`` before you train.
+``lewm-finetune inspect <file>.h5`` before you train.
 
 ## File location
 
@@ -19,7 +19,7 @@ convention and the loader hard-codes it.
 ## Required keys
 
 All five of these must be present at the root of the HDF5 file. The validator
-(`scripts/validate_dataset.py`) rejects any file missing one of them.
+(`lewm-finetune inspect`) rejects any file missing one of them.
 
 | Key           | Shape                | Dtype      | Description                                                |
 |---------------|----------------------|------------|------------------------------------------------------------|
@@ -68,7 +68,7 @@ them as "Extra columns (ignored by training)" so you can see what's there.
 ## Episode metadata rules
 
 The validator enforces the following invariants. Training will not work if
-they are violated; `validate_dataset.py` will tell you exactly which one.
+they are violated; `lewm-finetune inspect` will tell you exactly which one.
 
 1. **Length agreement** — `len(ep_len) == len(ep_offset) == E`.
 2. **Positivity** — every `ep_len[i] > 0`; every `ep_offset[i] >= 0`.
@@ -84,7 +84,7 @@ Run the bundled inspector. It is torch-free, so you can run it on any
 machine that has `h5py` installed, even without the full training stack:
 
 ```bash
-python scripts/validate_dataset.py ./data/datasets/my_dataset.h5
+lewm-finetune inspect ./data/datasets/my_dataset.h5
 ```
 
 Exit codes:
@@ -96,7 +96,7 @@ For CI pipelines or scripted workflows, use `--json` to get a machine-readable
 report:
 
 ```bash
-python scripts/validate_dataset.py ./data/datasets/my_dataset.h5 --json
+lewm-finetune inspect ./data/datasets/my_dataset.h5 --json
 ```
 
 ## Example: creating an HDF5 file from scratch

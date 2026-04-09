@@ -102,13 +102,8 @@ def evaluate(run_dir: str | Path, device: str | None = None) -> dict[str, Any]:
         },
     }
 
-    # metrics.json is the canonical machine-readable output. evaluation_results.json
-    # mirrors the same content for scripts that expect the older filename.
     metrics_path = run_dir / "metrics.json"
     with open(metrics_path, "w") as f:
-        json.dump(result, f, indent=2)
-    legacy_path = run_dir / "evaluation_results.json"
-    with open(legacy_path, "w") as f:
         json.dump(result, f, indent=2)
 
     print(f"  pred_mse={result['metrics']['pred_mse']:.6f}")

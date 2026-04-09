@@ -3,7 +3,7 @@
 # defaults from src/lewm_finetune/config.py.
 #
 # Run:
-#     python scripts/finetune.py --config configs/example.yaml
+#     lewm-finetune train --config configs/example.yaml
 
 # ── Required ────────────────────────────────────────────────────────────────
 pretrained_path: ./checkpoints/lewm-pretrained   # folder, .pt file, or HF repo id
