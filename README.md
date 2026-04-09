@@ -58,7 +58,7 @@ pip install -e .
 
 Zero-to-train on a fresh machine, after the install steps above.
 
-Point `pretrained_path` at a HuggingFace repo id to auto-download on first use — e.g. `quentinll/lewm-cube` from the [quentinll/lewm collection](https://huggingface.co/collections/quentinll/lewm). Official LeWM datasets live in the same collection; otherwise bring your own HDF5 matching [docs/DATA_FORMAT.md](docs/DATA_FORMAT.md). The loader reads `<data_cache_dir>/datasets/<dataset_name>.h5` — both pieces of the path come from the config.
+Download a LeWM checkpoint from the [quentinll/lewm collection](https://huggingface.co/collections/quentinll/lewm) into a local folder and point `pretrained_path` at that folder. Official LeWM datasets live in the same collection; otherwise bring your own HDF5 matching [docs/DATA_FORMAT.md](docs/DATA_FORMAT.md). The loader reads `<data_cache_dir>/datasets/<dataset_name>.h5` — both pieces of the path come from the config.
 
 `dataset_name` is the HDF5 filename stem under `<data_cache_dir>/datasets/` — for example, `data_cache_dir: ./data` and `dataset_name: my_dataset` means the file must exist at `./data/datasets/my_dataset.h5`.
 
@@ -66,7 +66,7 @@ Write a config:
 
 ```yaml
 # my_run.yaml
-pretrained_path: quentinll/lewm-cube
+pretrained_path: ./checkpoints/lewm-cube
 dataset_name: my_dataset
 data_cache_dir: ./data
 action_dim: 7
