@@ -10,7 +10,7 @@ Official LeWM checkpoints and datasets: [quentinll/lewm on Hugging Face](https:/
 
 ## Install
 
-> **Important:** you must install `stable-worldmodel` from source before anything else. The PyPI wheel (0.0.6) is missing the LeWM code path this tool depends on. Tested against commit `ba10600`.
+> **Important:** you must install `stable-worldmodel` from source. The PyPI wheel (0.0.6) is missing the LeWM code path this tool depends on. Tested against commit `ba10600`.
 
 ```bash
 git clone https://github.com/kevdozer1/leWN_finetune_toolkit.git lewm-finetune
