@@ -2,7 +2,7 @@
 
 Fine-tune a pretrained [LeWorldModel](https://github.com/galilai-group/stable-worldmodel) checkpoint on your own HDF5 episode dataset.
 
-One YAML config. Three CLI commands: `train`, `eval`, `inspect`.
+One YAML config. Three CLI commands: `train`, `eval`, `inspect`. This is a minimal finetuning harness, not a benchmark suite, dataset platform, or general world-model framework.
 
 Official LeWM checkpoints and datasets: [quentinll/lewm on Hugging Face](https://huggingface.co/collections/quentinll/lewm)
 
@@ -15,8 +15,12 @@ Official LeWM checkpoints and datasets: [quentinll/lewm on Hugging Face](https:/
 ```bash
 # 1. Clone and create a virtualenv
 git clone https://github.com/kevdozer1/leWN_finetune_toolkit.git lewm-finetune
+# note: the GitHub repo name differs from the package name; the installed CLI is lewm-finetune
 cd lewm-finetune
+
+# macOS / Linux
 python -m venv .venv && source .venv/bin/activate
+# Windows PowerShell: python -m venv .venv && .venv\Scripts\Activate.ps1
 
 # 2. Install torch for your platform
 pip install torch  # see https://pytorch.org/get-started/locally/
@@ -31,8 +35,9 @@ pip install -e ".[train]"
 If you accidentally installed the PyPI wheel first:
 
 ```bash
-pip uninstall stable-worldmodel
-# then re-run the source install and pip install -e ".[train]"
+pip uninstall -y stable-worldmodel
+pip install -e "git+https://github.com/galilai-group/stable-worldmodel.git@ba10600#egg=stable-worldmodel"
+pip install -e ".[train]"
 ```
 
 **Inspect-only install** (no torch required):
@@ -51,7 +56,7 @@ pip install -e .
 lewm-finetune inspect ./data/my_dataset.h5
 ```
 
-Prints shapes, dtypes, episode counts, and any format violations. See [docs/DATA_FORMAT.md](docs/DATA_FORMAT.md) for the HDF5 contract.
+Prints shapes, dtypes, episode counts, and any format violations. Torch-free — can be run before installing the training extras. See [docs/DATA_FORMAT.md](docs/DATA_FORMAT.md) for the HDF5 contract.
 
 ### Train
 
@@ -75,7 +80,7 @@ Minimal config:
 
 ```yaml
 pretrained_path: ./checkpoints/lewm-pretrained
-dataset_name: my_dataset
+dataset_name: my_dataset   # expects the file at <data_cache_dir>/datasets/<dataset_name>.h5
 data_cache_dir: ./data
 action_dim: 7
 ```
